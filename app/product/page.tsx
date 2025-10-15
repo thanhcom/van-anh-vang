@@ -19,6 +19,7 @@ const images = [
   "/img/13.jpg",
   "/img/14.jpg",
   "/img/15.jpg",
+  "/img/16.jpg",
 ];
 
 export const metadata = {
