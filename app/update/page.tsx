@@ -28,7 +28,7 @@ function timeAgo(dateString: string) {
 
 export default function BangGiaVangManager() {
   useEffect(() => {
-    document.title = "💎 Quản lý Bảng giá vàng - Công Ngọc";
+    document.title = "💎 Quản lý Bảng giá vàng - Vân Anh";
   }, []);
 
   const [rows, setRows] = useState<BangGia[]>([]);
@@ -156,7 +156,7 @@ export default function BangGiaVangManager() {
   return (
     <div className="p-6 max-w-3xl mx-auto">
       <h2 className="text-3xl font-bold mb-6 text-red-700 text-center">
-        💎 Quản lý Bảng giá vàng - Công Ngọc
+        💎 Quản lý Bảng giá vàng - Vàng Bạc Vân Anh
       </h2>
 
       {/* ===== FORM ===== */}
