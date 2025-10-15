@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://vangbaccongngoc.com', // đổi thành domain thật của bạn
+  siteUrl: 'https://vangbacvananh.com', // đổi thành domain thật của bạn
   generateRobotsTxt: true,
   sitemapSize: 5000,
   changefreq: 'daily',
