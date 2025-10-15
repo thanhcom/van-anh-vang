@@ -15,13 +15,13 @@ const supabaseServer = createClient(
 );
 
 export const metadata = {
-  title: "Vàng Bạc Công Ngọc - Lịch sử giá vàng",
+  title: "Vàng Bạc Vân Anh - Lịch sử giá vàng",
   description:
-    "Khám phá lịch sử biến động giá vàng tại Công Ngọc.",
+    "Khám phá lịch sử biến động giá vàng tại Vàng Bạc Vân Anh.",
   openGraph: {
-    title: "Lịch sử giá vàng tại Công Ngọc",
-    description: "Theo dõi biến động giá vàng theo thời gian thực tại Vàng Bạc Công Ngọc.",
-    url: "https://vangbaccongngoc.com/history",
+    title: "Lịch sử giá vàng tại Vàng Bạc Vân Anh",
+    description: "Theo dõi biến động giá vàng theo thời gian thực tại Vàng Bạc Vân Anh.",
+    url: "https://vangbacvananh.com/history",
     images: [
       {
         url: "/img/5.jpeg",
@@ -47,7 +47,7 @@ export default async function LichSuPage() {
 
   // Đặt default loại vàng rõ ràng
   const defaultLoaiVang =
-    danhSachVang.find((v) => v === "Nhẫn Tròn Công Ngọc 99,99") ||
+    danhSachVang.find((v) => v === "Nhẫn Tròn Vân Anh 99,99") ||
     danhSachVang[0] ||
     "";
 

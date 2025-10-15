@@ -3,11 +3,11 @@ import Footer from "../components/Footer";
 import Slide from "../components/Slide";
 
 export const metadata = {
-  title: "Vàng Bạc Công Ngọc - Niềm tin và chất lượng",
+  title: "Vàng Bạc Vân Anh - Niềm tin và chất lượng",
   description:
-    "Vàng Bạc Công Ngọc cung cấp nhẫn, dây chuyền, vòng tay… chất lượng cao, uy tín .",
+    "Vàng Bạc Vân Anh cung cấp nhẫn, dây chuyền, vòng tay… chất lượng cao, uy tín .",
   openGraph: {
-    title: "Thông tin Vàng Bạc Công Ngọc",
+    title: "Thông tin Vàng Bạc Vân Anh",
     description: "Sản phẩm vàng bạc chất lượng cao, uy tín.",
     url: "https://vangbacvananh.com/info",
     images: [
@@ -54,7 +54,7 @@ export default function InfoPage() {
           </p>
 
           <p className="mb-6 text-gray-800 text-base md:text-lg leading-relaxed">
-            📍 <strong>Địa chỉ cửa hàng:</strong> 42 Trần Hưng Đạo, Hải Dương
+            📍 <strong>Địa chỉ cửa hàng:</strong> 42 Trần Hưng Đạo, Hải Dương , 38 Trần Hưng Đạo, Hải Dương
             <br />
             📞 <strong>Hotline:</strong> 07.08.40.9999
             <br />
@@ -65,7 +65,7 @@ export default function InfoPage() {
           <div className="mb-8 w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-xl ring-2 ring-red-200">
             <iframe
               title="Bản đồ Vàng Bạc Vân Anh"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.4644098584993!2d106.32534807596356!3d20.938574090631692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31358b8e07e7d63d%3A0x8cf0f0e8c432c77!2zNDIgVHLhuqduIEjGsG5nIMSQ4bqhdSwgSOG6o2kgRMawxqFuZywgSOG6o2kgRMawxqFuZywgSOG6o2kgRMawxqFuZw!5e0!3m2!1svi!2s!4v1760493850089!5m2!1svi!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d528.2753863022624!2d106.33216808890509!3d20.938961444503352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31359b4797276c2d%3A0xadb658b1589c9dbf!2zRG9hbmggTmdoaeG7h3AgVsOgbmcgQuG6oWMgVsOibiBBbmg!5e0!3m2!1svi!2s!4v1760502175999!5m2!1svi!2s"
               width="100%"
               height="100%"
               style={{ border: 0 }}

@@ -6,13 +6,13 @@ import { BangGiaRealtimeWrapper } from "./BangGiaClient";
 import { createClient } from "@supabase/supabase-js";
 
 export const metadata = {
-  title: "Vàng Bạc Công Ngọc - Trang chủ",
+  title: "Vàng Bạc Vân Anh - Home",
   description:
-    "Vàng Bạc Công Ngọc cung cấp nhẫn, dây chuyền, vòng tay… chất lượng cao, uy tín .",
+    "Vàng Bạc Vân Anh cung cấp nhẫn, dây chuyền, vòng tay… chất lượng cao, uy tín .",
   openGraph: {
-    title: "Thông tin Vàng Bạc Công Ngọc",
+    title: "Thông tin Vàng Bạc Vân Anh",
     description: "Sản phẩm vàng bạc chất lượng cao, uy tín.",
-    url: "https://vangbaccongngoc.com/home",
+    url: "https://vangbacvananh.com/home",
     images: [
       {
         url: "/img/5.jpeg",

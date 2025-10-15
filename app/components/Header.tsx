@@ -18,9 +18,6 @@ export default function Header() {
           <Link href="/history" className="hover:text-white transition">
             Lịch sử
           </Link>
-          <Link href="/info" className="hover:text-white transition">
-            Thông tin
-          </Link>
           <Link href="/product" className="hover:text-white transition">
             Sản phẩm
           </Link>

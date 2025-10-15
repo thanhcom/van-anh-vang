@@ -14,8 +14,18 @@ interface BangGia {
 export default function BangGiaVangCongNgoc() {
   const [data, setData] = useState<BangGia[]>([]);
   const [highlightId, setHighlightId] = useState<number | null>(null);
+  const [today, setToday] = useState<string>("");
 
   useEffect(() => {
+    // Cập nhật ngày tháng hiện tại theo định dạng dd/mm/yyyy
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString("vi-VN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    setToday(formattedDate);
+
     // Lấy dữ liệu lần đầu, sắp xếp theo id
     const fetchData = async () => {
       const { data } = await supabase
@@ -56,10 +66,8 @@ export default function BangGiaVangCongNgoc() {
                 break;
             }
 
-            // Sắp xếp lại theo id
             newData.sort((a, b) => a.id - b.id);
 
-            // Xóa highlight sau 1s
             if (payload.eventType === "INSERT" || payload.eventType === "UPDATE") {
               setTimeout(() => setHighlightId(null), 1000);
             }
@@ -81,13 +89,14 @@ export default function BangGiaVangCongNgoc() {
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <div className={styles.companyName}>
-            DOANH NGHIỆP VÀNG BẠC CÔNG NGỌC
+            DOANH NGHIỆP VÀNG BẠC VÂN ANH
           </div>
-          <div>ĐC: Ngã Tư Vũ Dũng, Xã Lai Khê, Hải Phòng</div>
-          <div>ĐT: 0904 588 222</div>
+          <div>ĐC: 38 & 42 Trần Hưng Đạo, Hải Dương</div>
+          <div>ĐT: 07.08.40.9999</div>
         </div>
         <div className={styles.headerCenter}>
           <h1>BẢNG GIÁ VÀNG HÔM NAY</h1>
+          <div className={styles.dateText}>Cập nhật ngày: {today}</div>
         </div>
       </header>
 
@@ -114,8 +123,9 @@ export default function BangGiaVangCongNgoc() {
               {index === 0 && (
                 <td className={styles.lienHe} rowSpan={data.length}>
                   <div className={styles.contactBox}>
-                    <div>0904 588 222</div>
-                    <div>0904 588 222</div>
+                    <div>07.08.40.9999</div>
+                    <div>09.888.27575</div>
+                    <div>098.777.4545</div>
                   </div>
                 </td>
               )}
@@ -127,7 +137,7 @@ export default function BangGiaVangCongNgoc() {
       {/* Chữ chạy */}
       <div className={styles.marquee}>
         <span>
-          VÀNG BẠC CÔNG NGỌC RẤT HÂN HẠNH ĐƯỢC PHỤC VỤ QUÝ KHÁCH - 📞 0904 588 222
+          VÀNG BẠC VÂN ANH RẤT HÂN HẠNH ĐƯỢC PHỤC VỤ QUÝ KHÁCH - 📞 07.08.40.9999 - CHUYÊN KINH DOANH VÀNG - NHẪN CƯỚI TRANG SỨC CAO CẤP - CAM KẾT UY TÍN – CHẤT LƯỢNG
         </span>
       </div>
     </div>

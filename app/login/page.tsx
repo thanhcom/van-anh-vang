@@ -58,7 +58,7 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-6 text-center text-xs text-gray-200/80">
-          © 2025 Vàng Bạc Công Ngọc
+          © 2025 Vàng Bạc Vân Anh
         </div>
       </div>
     </div>
