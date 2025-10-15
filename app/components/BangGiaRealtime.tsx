@@ -112,16 +112,16 @@ export default function BangGiaRealtime({ initialData = [] }: { initialData?: Gi
       <div className="container mx-auto px-3 md:px-12 text-center">
         {/* 🔹 Tiêu đề cũ giữ nguyên */}
         <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-red-700 mb-6 md:mb-8">
-          Bảng giá vàng hôm nay –{" "}
-          <span className="text-yellow-800">
-            {new Date().toLocaleDateString("vi-VN", {
-              weekday: "long",
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
-            })}
-          </span>
-        </h3>
+  Bảng giá vàng hôm nay  
+  <span className="text-yellow-800 block mt-1">
+    {new Date().toLocaleDateString("vi-VN", {
+      weekday: "long",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })}
+  </span>
+</h3>      
 
         {/* 🔹 Đơn vị & thời gian (căn trái) */}
         <div className="text-yellow-800 text-lg font-semibold mb-6 leading-tight text-left">
