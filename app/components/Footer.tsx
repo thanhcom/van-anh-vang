@@ -27,7 +27,7 @@ export default function Footer() {
             </a>{" "}
             -
             <a href="tel:0988827575" className="hover:underline">
-              0988 827 575
+              {" "}0988 827 575
             </a>
           </p>
           <p className="font-semibold text-yellow-300">
@@ -35,12 +35,12 @@ export default function Footer() {
           </p>
           <p className="font-semibold text-yellow-300">
             📞 Hotline:{" "}
-            <a href="tel:0989016664" className="hover:underline">
-              0989 016 664
+            <a href="tel:0987774545" className="hover:underline">
+              {" "}0987 774 545
             </a>{" "}
             -
-            <a href="tel:0987774545" className="hover:underline">
-              0987 774 545
+            <a href="tel:0989016664" className="hover:underline">
+              {" "}0989 016 664
             </a>
           </p>
         </div>

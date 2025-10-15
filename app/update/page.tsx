@@ -8,7 +8,7 @@ interface BangGia {
   loai_vang: string;
   mua_vao: number;
   ban_ra: number;
-  don_vi?: string; // giữ để hiển thị giao diện
+  don_vi?: string;
   updated_at?: string;
 }
 
@@ -36,12 +36,12 @@ export default function BangGiaVangManager() {
     loai_vang: "",
     mua_vao: 0,
     ban_ra: 0,
-    don_vi: "Nghìn VNĐ/chỉ", // chỉ để hiển thị
+    don_vi: "Nghìn VNĐ/chỉ",
   });
   const [editingId, setEditingId] = useState<number | null>(null);
   const [, setTick] = useState(0);
 
-  // 🔹 Load + realtime
+  // 🔹 Load ban đầu + realtime
   useEffect(() => {
     loadData();
 
@@ -50,7 +50,12 @@ export default function BangGiaVangManager() {
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "bang_gia_vang" },
-        () => loadData()
+        (payload) => {
+          if (payload.eventType === "INSERT" || payload.eventType === "DELETE") {
+            loadData();
+          }
+          // ⛔ Không reload khi UPDATE — giữ nguyên thứ tự
+        }
       )
       .subscribe();
 
@@ -59,7 +64,7 @@ export default function BangGiaVangManager() {
     };
   }, []);
 
-  // 🔹 Cập nhật "time ago"
+  // 🔹 Tick để update timeAgo
   useEffect(() => {
     const interval = setInterval(() => setTick((t) => t + 1), 1000);
     return () => clearInterval(interval);
@@ -69,13 +74,12 @@ export default function BangGiaVangManager() {
     const { data, error } = await supabase
       .from("bang_gia_vang")
       .select("*")
-      .order("updated_at", { ascending: false });
+      .order("id", { ascending: true });
 
     if (error) {
       console.error("❌ Lỗi load dữ liệu:", error.message);
       alert("Không thể tải dữ liệu: " + error.message);
     } else {
-      // Gán đơn vị mặc định để hiển thị
       const withDonVi = (data || []).map((r) => ({
         ...r,
         don_vi: "Nghìn VNĐ/chỉ",
@@ -90,30 +94,52 @@ export default function BangGiaVangManager() {
 
     try {
       if (editingId) {
+        const updatedAt = new Date().toISOString();
         const { error } = await supabase
           .from("bang_gia_vang")
           .update({
             loai_vang: formData.loai_vang,
             mua_vao: formData.mua_vao,
             ban_ra: formData.ban_ra,
-            updated_at: new Date().toISOString(),
+            updated_at: updatedAt,
           })
           .eq("id", editingId);
 
         if (error) throw error;
+
+        setRows((prev) =>
+          prev.map((item) =>
+            item.id === editingId
+              ? { ...item, ...formData, updated_at: updatedAt }
+              : item
+          )
+        );
+
         alert("✅ Cập nhật thành công!");
         setEditingId(null);
       } else {
-        const { error } = await supabase.from("bang_gia_vang").insert([
-          {
-            loai_vang: formData.loai_vang,
-            mua_vao: formData.mua_vao,
-            ban_ra: formData.ban_ra,
-            updated_at: new Date().toISOString(),
-          },
-        ]);
+        const updatedAt = new Date().toISOString();
+        const { data, error } = await supabase
+          .from("bang_gia_vang")
+          .insert([
+            {
+              loai_vang: formData.loai_vang,
+              mua_vao: formData.mua_vao,
+              ban_ra: formData.ban_ra,
+              updated_at: updatedAt,
+            },
+          ])
+          .select();
 
         if (error) throw error;
+
+        if (data && data.length > 0) {
+          setRows((prev) => [
+            ...prev,
+            { ...data[0], don_vi: "Nghìn VNĐ/chỉ" },
+          ]);
+        }
+
         alert("✅ Thêm mới thành công!");
       }
 
@@ -128,7 +154,6 @@ export default function BangGiaVangManager() {
         console.error("❌ Lỗi Supabase:", err.message);
         alert("❌ Lỗi khi lưu dữ liệu: " + err.message);
       } else {
-        console.error("❌ Lỗi Supabase không xác định:", err);
         alert("❌ Có lỗi xảy ra, vui lòng thử lại.");
       }
     }
@@ -148,21 +173,22 @@ export default function BangGiaVangManager() {
         console.error("❌ Lỗi xóa:", error.message);
         alert("Lỗi khi xóa: " + error.message);
       } else {
+        setRows((prev) => prev.filter((r) => r.id !== id));
         alert("🗑️ Đã xóa thành công!");
       }
     }
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-red-700 text-center">
+    <div className="p-4 md:p-6 max-w-3xl mx-auto">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-red-700 text-center">
         💎 Quản lý Bảng giá vàng - Vàng Bạc Vân Anh
       </h2>
 
       {/* ===== FORM ===== */}
       <form
         onSubmit={handleSubmit}
-        className="bg-red-50 p-5 rounded-2xl shadow-lg border border-red-200 mb-6 space-y-3"
+        className="bg-red-50 p-4 md:p-5 rounded-2xl shadow-lg border border-red-200 mb-6 space-y-3"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <input
@@ -173,7 +199,7 @@ export default function BangGiaVangManager() {
               setFormData({ ...formData, loai_vang: e.target.value })
             }
             required
-            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none"
+            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none text-sm md:text-base"
           />
           <input
             type="number"
@@ -183,7 +209,7 @@ export default function BangGiaVangManager() {
               setFormData({ ...formData, mua_vao: Number(e.target.value) })
             }
             required
-            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none"
+            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none text-sm md:text-base"
           />
           <input
             type="number"
@@ -193,7 +219,7 @@ export default function BangGiaVangManager() {
               setFormData({ ...formData, ban_ra: Number(e.target.value) })
             }
             required
-            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none"
+            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none text-sm md:text-base"
           />
           <input
             type="text"
@@ -202,13 +228,13 @@ export default function BangGiaVangManager() {
             onChange={(e) =>
               setFormData({ ...formData, don_vi: e.target.value })
             }
-            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none"
+            className="border border-red-300 p-2 rounded focus:ring-2 focus:ring-red-500 outline-none text-sm md:text-base"
           />
         </div>
 
         <button
           type="submit"
-          className={`w-full py-2 font-bold rounded-lg transition cursor-pointer ${
+          className={`w-full py-2 font-bold rounded-lg transition cursor-pointer text-sm md:text-base ${
             editingId
               ? "bg-red-600 hover:bg-red-700 text-white"
               : "bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white"
@@ -222,42 +248,42 @@ export default function BangGiaVangManager() {
       <div className="overflow-x-auto shadow-lg rounded-xl border border-red-200">
         <table className="min-w-full text-center">
           <thead>
-            <tr className="bg-gradient-to-r from-red-600 to-red-700 text-white">
-              <th className="py-3 px-4">Loại vàng</th>
-              <th className="py-3 px-4">Mua vào</th>
-              <th className="py-3 px-4">Bán ra</th>
-              <th className="py-3 px-4">Cập nhật</th>
-              <th className="py-3 px-4">Hành động</th>
+            <tr className="bg-gradient-to-r from-red-600 to-red-700 text-white text-sm md:text-base">
+              <th className="py-2 px-2 md:px-4">Loại vàng</th>
+              <th className="py-2 px-2 md:px-4">Mua vào</th>
+              <th className="py-2 px-2 md:px-4">Bán ra</th>
+              <th className="py-2 px-2 md:px-4">Cập nhật</th>
+              <th className="py-2 px-2 md:px-4">Hành động</th>
             </tr>
           </thead>
-          <tbody className="bg-white">
+          <tbody className="bg-white text-sm md:text-base">
             {rows.map((r) => (
               <tr
                 key={r.id}
                 className="border-b hover:bg-red-50 transition-colors"
               >
-                <td className="py-2 px-4 font-semibold text-red-700">
+                <td className="py-1 md:py-2 px-2 md:px-4 font-semibold text-red-700">
                   {r.loai_vang}
                 </td>
-                <td className="py-2 px-4 text-gray-700">
+                <td className="py-1 md:py-2 px-2 md:px-4 text-gray-700">
                   {r.mua_vao.toLocaleString()} {r.don_vi}
                 </td>
-                <td className="py-2 px-4 text-gray-700">
+                <td className="py-1 md:py-2 px-2 md:px-4 text-gray-700">
                   {r.ban_ra.toLocaleString()} {r.don_vi}
                 </td>
-                <td className="py-2 px-4 text-sm text-yellow-500 font-semibold">
+                <td className="py-1 md:py-2 px-2 md:px-4 text-yellow-500 font-semibold">
                   {r.updated_at ? timeAgo(r.updated_at) : "-"}
                 </td>
-                <td className="py-2 px-4 flex justify-center space-x-2">
+                <td className="py-1 md:py-2 px-2 md:px-4 flex justify-center space-x-2">
                   <button
                     onClick={() => handleEdit(r)}
-                    className="text-red-600 font-semibold cursor-pointer"
+                    className="text-red-600 font-semibold cursor-pointer text-xs md:text-sm"
                   >
                     ✏️ Sửa
                   </button>
                   <button
                     onClick={() => handleDelete(r.id!)}
-                    className="text-gray-500 font-semibold cursor-pointer"
+                    className="text-gray-500 font-semibold cursor-pointer text-xs md:text-sm"
                   >
                     🗑️ Xóa
                   </button>

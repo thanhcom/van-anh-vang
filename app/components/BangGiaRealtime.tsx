@@ -6,7 +6,6 @@ import { Database } from "../../types/supabase";
 
 type BangGiaVang = Database["public"]["Tables"]["bang_gia_vang"]["Row"];
 
-
 interface GiaVang {
   id: number;
   loai_vang: string;
@@ -31,7 +30,14 @@ function timeAgo(dateString: string): string {
 export default function BangGiaRealtime({ initialData = [] }: { initialData?: GiaVang[] }) {
   const [bangGia, setBangGia] = useState<GiaVang[]>(initialData);
   const [loading, setLoading] = useState(initialData.length === 0);
-  const [tick, setTick] = useState(0); // Cập nhật timeAgo mỗi phút
+  const [tick, setTick] = useState(0);
+  const [now, setNow] = useState(new Date());
+
+  /** ⏰ Cập nhật giờ mỗi giây */
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   /** 1️⃣ Lấy dữ liệu ban đầu nếu chưa có (SSR fallback + realtime ready) */
   useEffect(() => {
@@ -42,7 +48,7 @@ export default function BangGiaRealtime({ initialData = [] }: { initialData?: Gi
         const { data, error } = await supabase
           .from("bang_gia_vang")
           .select("*")
-          .order("id", { ascending: true });
+          .order("id", { ascending: true }); // giữ thứ tự theo ID
         if (!error && data && mounted) {
           setBangGia(data);
           setLoading(false);
@@ -101,10 +107,10 @@ export default function BangGiaRealtime({ initialData = [] }: { initialData?: Gi
   }
 
   /** ✅ Render bảng giá */
-  /** ✅ Render bảng giá */
   return (
     <section className="py-8 md:py-16 bg-yellow-50">
       <div className="container mx-auto px-3 md:px-12 text-center">
+        {/* 🔹 Tiêu đề cũ giữ nguyên */}
         <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-red-700 mb-6 md:mb-8">
           Bảng giá vàng hôm nay –{" "}
           <span className="text-yellow-800">
@@ -117,6 +123,26 @@ export default function BangGiaRealtime({ initialData = [] }: { initialData?: Gi
           </span>
         </h3>
 
+        {/* 🔹 Đơn vị & thời gian (căn trái) */}
+        <div className="text-yellow-800 text-lg font-semibold mb-6 leading-tight text-left">
+          <p>Đơn vị tính: Nghìn VNĐ/Chỉ</p>
+          <p>
+            {now.toLocaleDateString("vi-VN", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}{" "}
+            –{" "}
+            {now.toLocaleTimeString("vi-VN", {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: false,
+            })}
+          </p>
+        </div>
+
+        {/* 🔹 Bảng giá */}
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white shadow-xl rounded-xl overflow-hidden text-sm sm:text-base md:text-lg">
             <thead className="bg-red-700 text-white text-sm sm:text-base md:text-2xl font-bold">
@@ -130,8 +156,7 @@ export default function BangGiaRealtime({ initialData = [] }: { initialData?: Gi
             <tbody>
               {bangGia.map((row) => {
                 const isNew =
-                  Date.now() - new Date(row.updated_at).getTime() < 5000; // highlight trong 5s
-
+                  Date.now() - new Date(row.updated_at).getTime() < 5000;
                 return (
                   <tr
                     key={row.id}
