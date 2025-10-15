@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vàng Bạc Công Ngọc",
-  description: "Vàng Bạc Công Ngọc cung cấp nhẫn, dây chuyền, vòng tay… chất lượng cao, uy tín",
+  title: "Vàng Bạc Vân Anh - Niềm tin và chất lượng",
+  description: "Vàng Bạc Vân Anh cung cấp nhẫn, dây chuyền, vòng tay… chất lượng cao, uy tín .",
 };
 
 export default function RootLayout({

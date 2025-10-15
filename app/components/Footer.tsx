@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="container mx-auto px-4 md:px-12 flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
           <div className="text-center md:text-left">
             <p className="text-sm md:text-base font-semibold text-yellow-300">
-              © 2025 Vàng Bạc Công Ngọc
+              © 2025 Vàng Bạc Vân Anh
             </p>
             <p className="text-xs md:text-sm text-yellow-300">
               Dev By Thành Trang Electronic
@@ -16,7 +16,7 @@ export default function Footer() {
 
           <div className="text-center md:text-left space-y-1">
             <p className="font-semibold text-yellow-300">
-              💎 Doanh nghiệp tư nhân Vàng Bạc Công Ngọc
+              💎 Doanh nghiệp tư nhân Vàng Bạc Vân Anh
             </p>
             <p className="font-semibold text-yellow-300">
               📞 Hotline:{" "}
@@ -25,14 +25,14 @@ export default function Footer() {
               </a>
             </p>
             <p className="font-semibold text-yellow-300">
-              🏠 Địa chỉ: Ngã Tư Vũ Dũng, Xã Lai Khê, Hải Phòng
+              🏠 Địa chỉ: 42 Trần Hưng Đạo, Hải Dương
             </p>
           </div>
 
           <div className="flex justify-center md:justify-end space-x-4">
             {/* Facebook */}
             <a
-              href="https://www.facebook.com/vang.bac.cong.ngoc.177478"
+              href="https://www.facebook.com/vananhhaiduong83"
               className="flex items-center space-x-1 font-semibold transition transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"
@@ -51,7 +51,7 @@ export default function Footer() {
 
             {/* Zalo */}
             <a
-              href="https://zalo.me/0904588222"
+              href="https://zalo.me/0708409999"
               className="flex items-center space-x-1 font-semibold transition transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"

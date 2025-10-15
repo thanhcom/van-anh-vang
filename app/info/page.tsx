@@ -9,7 +9,7 @@ export const metadata = {
   openGraph: {
     title: "Thông tin Vàng Bạc Công Ngọc",
     description: "Sản phẩm vàng bạc chất lượng cao, uy tín.",
-    url: "https://vangbaccongngoc.com/info",
+    url: "https://vangbacvananh.com/info",
     images: [
       {
         url: "/img/5.jpeg",
@@ -27,60 +27,69 @@ export default function InfoPage() {
       <Slide />
 
       {/* Nội dung chính */}
-      <section className="py-12 md:py-16 bg-yellow-50">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-red-50 to-yellow-50">
         <div className="container mx-auto px-4 md:px-12 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-red-700 mb-8">
-            Thông tin về Vàng Bạc Công Ngọc
+          <h2 className="text-3xl md:text-4xl font-extrabold text-red-700 mb-8 text-center md:text-left drop-shadow-[0_0_6px_rgba(255,100,100,0.3)]">
+            Thông tin về Vàng Bạc Vân Anh
           </h2>
 
-          <p className="mb-6 text-gray-800 text-base md:text-lg">
-            💎 Vàng Bạc Công Ngọc được thành lập từ năm XXXX, với hơn XX năm
-            kinh nghiệm trong lĩnh vực kinh doanh vàng bạc đá quý. Chúng tôi
-            cam kết mang đến những sản phẩm chất lượng cao, tinh xảo và uy tín
-            cho khách hàng.
+          <p className="mb-6 text-gray-800 text-base md:text-lg leading-relaxed">
+            💎 <strong>Vàng Bạc Vân Anh</strong> là địa chỉ uy tín hàng đầu
+            trong lĩnh vực vàng bạc – đá quý tại Hải Dương. Với nhiều năm kinh
+            nghiệm, chúng tôi tự hào mang đến cho quý khách hàng những sản phẩm
+            tinh xảo, đẳng cấp và chất lượng vượt trội.
           </p>
 
-          <p className="mb-6 text-gray-800 text-base md:text-lg">
-            🏆 Chúng tôi cung cấp đa dạng các sản phẩm như nhẫn, dây chuyền,
-            vòng tay, bông tai, được chế tác tỉ mỉ từ vàng, bạc, đá quý cao
-            cấp. Mỗi sản phẩm đều được kiểm định chất lượng nghiêm ngặt trước
-            khi đến tay khách hàng.
+          <p className="mb-6 text-gray-800 text-base md:text-lg leading-relaxed">
+            🌟 Tại <strong>Vàng Bạc Vân Anh</strong>, mỗi sản phẩm không chỉ là
+            món trang sức mà còn là biểu tượng của phong cách và giá trị. Chúng
+            tôi cung cấp đa dạng mẫu mã như nhẫn, dây chuyền, vòng tay, bông
+            tai… được chế tác từ vàng, bạc và đá quý cao cấp.
           </p>
 
-          <p className="mb-6 text-gray-800 text-base md:text-lg">
-            📍 Địa chỉ cửa hàng: Ngã Tư Vũ Dũng, Xã Lai Khê, Hải Phòng.
+          <p className="mb-6 text-gray-800 text-base md:text-lg leading-relaxed">
+            🏆 Mỗi tác phẩm đều được chế tạo tỉ mỉ bởi đội ngũ thợ kim hoàn lành
+            nghề, đảm bảo sự tinh tế trong từng chi tiết – mang đến cho bạn trải
+            nghiệm sang trọng, khác biệt và đáng nhớ.
+          </p>
+
+          <p className="mb-6 text-gray-800 text-base md:text-lg leading-relaxed">
+            📍 <strong>Địa chỉ cửa hàng:</strong> 42 Trần Hưng Đạo, Hải Dương
             <br />
-            📞 Hotline: 0904 588 222
+            📞 <strong>Hotline:</strong> 07.08.40.9999
             <br />
-            🕒 Giờ mở cửa: 8:00 – 20:00 mỗi ngày
+            🕒 <strong>Giờ mở cửa:</strong> 8:00 – 20:00 mỗi ngày
           </p>
 
           {/* Bản đồ */}
-    <div className="mb-6 w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
-      <iframe
-        title="Bản đồ Vàng Bạc Công Ngọc"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14902.206332870059!2d106.42128821225592!3d20.970515577150685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313583000877bcc7%3A0xaefbf9620c0ab99a!2zRG9hbmggbmdoaeG7h3AgdMawIG5ow6JuIFbDoG5nIGLhuqFjIEPDtG5nIE5n4buNYw!5e0!3m2!1svi!2s!4v1760166002063!5m2!1svi!2s"
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
+          <div className="mb-8 w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-xl ring-2 ring-red-200">
+            <iframe
+              title="Bản đồ Vàng Bạc Vân Anh"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.4644098584993!2d106.32534807596356!3d20.938574090631692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31358b8e07e7d63d%3A0x8cf0f0e8c432c77!2zNDIgVHLhuqduIEjGsG5nIMSQ4bqhdSwgSOG6o2kgRMawxqFuZywgSOG6o2kgRMawxqFuZywgSOG6o2kgRMawxqFuZw!5e0!3m2!1svi!2s!4v1760493850089!5m2!1svi!2s"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
 
-          <p className="mb-6 text-gray-800 text-base md:text-lg">
-            Chúng tôi luôn đặt uy tín và sự hài lòng của khách hàng lên hàng
-            đầu, đảm bảo mỗi sản phẩm đều mang lại giá trị và sự hài lòng
-            tuyệt đối.
+          <p className="mb-6 text-gray-800 text-base md:text-lg leading-relaxed">
+            ❤️ <strong>Vàng Bạc Vân Anh</strong> luôn đặt uy tín và sự hài lòng
+            của khách hàng lên hàng đầu. Chúng tôi tin rằng, mỗi sản phẩm được
+            lựa chọn từ Vân Anh sẽ là một kỷ vật quý giá, lưu giữ khoảnh khắc
+            đáng nhớ trong cuộc sống của bạn.
           </p>
 
-          <p className="text-gray-800 text-base md:text-lg">
-            💖 Hãy đến và trải nghiệm sự tinh tế, sang trọng và đẳng cấp của
-            Vàng Bạc Công Ngọc ngay hôm nay!
+          <p className="text-gray-800 text-base md:text-lg leading-relaxed font-semibold">
+            💖 Hãy đến và cảm nhận vẻ đẹp tinh tế, sang trọng và đẳng cấp của{" "}
+            <span className="text-red-600 font-bold">Vàng Bạc Vân Anh</span>{" "}
+            ngay hôm nay!
           </p>
         </div>
       </section>
+
       <Footer />
     </main>
   );
