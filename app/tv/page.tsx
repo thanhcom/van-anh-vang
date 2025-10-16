@@ -92,7 +92,9 @@ export default function BangGiaVangCongNgoc() {
             DOANH NGHIỆP VÀNG BẠC VÂN ANH
           </div>
           <div>ĐC: 38 & 42 Trần Hưng Đạo, Hải Dương</div>
+          <div>ĐT: 0987.774.545</div>
           <div>ĐT: 07.08.40.9999</div>
+          
         </div>
         <div className={styles.headerCenter}>
           <h1>BẢNG GIÁ VÀNG HÔM NAY</h1>
